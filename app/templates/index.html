@@ -31,3 +31,38 @@
 
           </div>
         </div>
+
+        <div class="col-9">
+          <h3 text-align="center"> HEADLINE NEWS </h3>
+          <div class="container">
+            <div class="card-columns">
+              {% for headlines in headlines %}
+
+              <div class="card">
+                <img class="card" src="{{headlines.image}}" alt="Card image cap" size="100px180">
+                <div class="card-body">
+                  <h5 class="card-title">{{headlines.author}}</h5>
+                  <p class="card-text">{{headlines.description}}</p>
+                  <a href="{{headlines.url}}">
+                    <p class="card-text">Click here for more details!</p>
+                  </a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Publish date:{{headlines.time}}</small>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+{% endblock %}
+      

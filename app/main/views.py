@@ -1,7 +1,7 @@
 from flask import app, render_template
 from app import app
 from . import main
-from ..request import get_source,article_source
+from ..request import get_source,article_source,get_category,get_headlines
 
 
 #our views
@@ -11,7 +11,8 @@ def index():
     Root function returning index/home page with data
     '''
     source= get_source()
-    return render_template('index.html',source=source)
+    headlines = get_headlines()
+    return render_template('index.html',source=source,headlines=headlines)
 
 @main.route('/article/<id>')
 def article(id):
@@ -22,3 +23,14 @@ def article(id):
     # title= 'Articles'
     articles = article_source(id)
     return render_template('article.html',articles= articles,id=id )
+
+@main.route('/categories/<cat_name>')
+def category(cat_name):
+    '''
+    function to return the categories.html page and its content
+    '''
+    category = get_category(cat_name)
+    title = f'{cat_name}'
+    cat = cat_name
+
+    return render_template('categories.html',title = title,category = category, cat= cat_name)
