@@ -10,5 +10,5 @@ def index():
     '''
     Root function returning index/home page with data
     '''
-    
-    return render_template('index.html')
+    source= get_source()
+    return render_template('index.html',source=source)
