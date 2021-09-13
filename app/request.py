@@ -1,5 +1,5 @@
 import urllib.request,json
-from .models import Source,Article
+from .models import Source,Article,Category,Headlines
 
 # Getting api key
 api_key = None
@@ -7,12 +7,15 @@ api_key = None
 source_url= None
 # Getting source url
 cat_url= None
+# Query source url
+query_url = None
 
 def configure_request(app):
-    global api_key, source_url, cat_url
+    global api_key, source_url, cat_url,query_url
     api_key = app.config['NEWS_API_KEY']
     source_url= app.config['NEWS_API_SOURCE_URL']
     cat_url=app.config['CAT_API_URL']
+    query_url = app.config['QUERY_URL']
 
 
 def get_source():
@@ -123,3 +126,21 @@ def get_headlines():
             get_headlines_results = process_articles_results(get_headlines_list)
 
     return get_headlines_results
+
+def get_query(cat_name):
+    '''
+    function that gets the response to the category json
+    '''
+    get_category_url = query_url.format(cat_name,api_key)
+    print(get_category_url)
+    with urllib.request.urlopen(get_category_url) as url:
+        get_category_data = url.read()
+        get_cartegory_response = json.loads(get_category_data)
+
+        get_cartegory_results = None
+
+        if get_cartegory_response['articles']:
+            get_cartegory_list = get_cartegory_response['articles']
+            get_cartegory_results = process_articles_results(get_cartegory_list)
+
+    return get_cartegory_results

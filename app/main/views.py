@@ -1,7 +1,6 @@
-from flask import app, render_template
-from app import app
+from flask import app, render_template,request,redirect,url_for
 from . import main
-from ..request import get_source,article_source,get_category,get_headlines
+from ..request import get_query, get_source,article_source,get_category,get_headlines
 
 
 #our views
@@ -12,7 +11,14 @@ def index():
     '''
     source= get_source()
     headlines = get_headlines()
-    return render_template('index.html',source=source,headlines=headlines)
+
+    search_article = request.args.get('article_search')
+    
+    if search_article:
+        return redirect(url_for('main.search',article_name = search_article))
+    else:
+        return render_template('index.html',source=source,headlines=headlines)
+        
 
 @main.route('/article/<id>')
 def article(id):
@@ -34,3 +40,10 @@ def category(cat_name):
     cat = cat_name
 
     return render_template('categories.html',title = title,category = category, cat= cat_name)
+
+@main.route('/search/<article_name>')
+def search(article_name):
+    whole_article_name = article_name.split(" ")
+    article_name_format = "+".join(whole_article_name)
+    search_results = get_query(article_name_format)
+    return render_template('search.html',source = search_results)

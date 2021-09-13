@@ -1,0 +1,25 @@
+<!-- {% macro displaySources(source_results_list) %}-->
+{% for source in sources %}
+<div class="main">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-3">
+        <div class="card ">
+          <div class="card-header">
+            <h4>Browse News Sources</h4>
+          </div>
+          <div class="list-group list-group-flush scrolly">
+            <ul>
+              {% for source in sources %}
+              <a href="/article/{{source.id}}">
+                <p class="text-capitalize text-muted">{{source.id}}</p>
+              </a>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+{% endfor %} {% endmacro %}
