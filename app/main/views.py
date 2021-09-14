@@ -17,7 +17,7 @@ def index():
     if search_article:
         return redirect(url_for('main.search',article_name = search_article))
     else:
-        return render_template('index.html',source=source,headlines=headlines)
+        return render_template('index.html',sources=source,headlines=headlines)
         
 
 @main.route('/article/<id>')
