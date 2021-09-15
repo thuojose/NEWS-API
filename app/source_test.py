@@ -1,7 +1,7 @@
 import unittest
-from models import source
+from models import sources
 
-Source = source.Source
+Sources = sources.Source
 
 class SourceTest(unittest.TestCase):
     '''
@@ -11,10 +11,10 @@ class SourceTest(unittest.TestCase):
         '''
         Method to run before every Test
         '''
-        self.new_source= Source( "abc-news","ABC News","Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.","http://abcnews.go.com","general")
+        self.new_source= Sources( "abc-news","ABC News","Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.","http://abcnews.go.com","general")
 
     def test_instance(self):
-        self.assertTrue(isinstance(self.new_source,source))
+        self.assertTrue(isinstance(self.new_source,sources))
 
 if __name__ == '__main__':
     unittest.main()

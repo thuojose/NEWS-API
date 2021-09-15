@@ -9,7 +9,7 @@ def index():
     '''
     Root function returning index/home page with data
     '''
-    source= get_source()
+    sources= get_source()
     headlines = get_headlines()
 
     search_article = request.args.get('article_search')
@@ -17,7 +17,7 @@ def index():
     if search_article:
         return redirect(url_for('main.search',article_name = search_article))
     else:
-        return render_template('index.html',sources=source,headlines=headlines)
+        return render_template('index.html',sources=sources,headlines=headlines)
         
 
 @main.route('/article/<id>')
@@ -28,7 +28,7 @@ def article(id):
     '''
     # title= 'Articles'
     articles = article_source(id)
-    return render_template('article.html',articles= articles,id=id )
+    return render_template('articles.html',articles= articles,id=id )
 
 @main.route('/categories/<cat_name>')
 def category(cat_name):
@@ -46,4 +46,4 @@ def search(article_name):
     whole_article_name = article_name.split(" ")
     article_name_format = "+".join(whole_article_name)
     search_results = get_query(article_name_format)
-    return render_template('search.html',source = search_results)
+    return render_template('search.html',sources = search_results)
